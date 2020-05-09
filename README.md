@@ -1,2 +1,2 @@
-# shrink-url
+# ShrinkLn
 A URL shortner service
