@@ -11,16 +11,14 @@ const urlArray = [];
 router.post('/', bodyParser.json(), (req, res)=>{
         const body = req.body;
         if(body && body.originalUrl){
-            const minUrl = UrlComponent.minimizeUrl(body.originalUrl);
+            const urlId = UrlComponent.minimizeUrl(body.originalUrl);
             urlArray.push({
-                id: minUrl,
+                id: urlId,
                 originalUrl: body.originalUrl
             });
             res.send({
                 originalUrl: body.originalUrl,
-                shrinkedUrl: (process.env.HOST ? process.env.HOST : 'localhost')
-                + (process.env.PORT ? ":" + process.env.PORT : ':3000')
-                + "/" + minUrl
+                shrinkedUrl: UrlComponent.authority() + "/" + urlId
             });
         } else {
             res.sendStatus(400);
