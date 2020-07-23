@@ -1,7 +1,10 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./App.css";
-import { Button, Typography, AppBar, Toolbar, TextField } from "@material-ui/core";
+import AppHeader from './components/AppHeaderBar';
 import { withStyles } from "@material-ui/core/styles"; 
+import UrlForm from "./components/UrlForm";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 const useStyles = theme => ({
   helloThereStyle : {
@@ -9,45 +12,39 @@ const useStyles = theme => ({
   }
 }); 
 
-class App extends Component {
+class App extends Component{
+
   state = {
-    url: "",
-    minimizedUrl: this.url
-  };
+    currentPage: 'urlForm'
+  }
 
-
-  onClick = (event) => {
-    
+  onPageChange = (page)=>{
     this.setState({
-      minimizedUrl: this.state.url + "minimized"
+      currentPage: page
     });
-  };
+  }
 
-  onChange = (event) => {
-    this.setState({
-      url: event.target.value
-    });
-  };
+  getCurrentPage(){
+    switch(this.state.currentPage){
+      case 'urlForm':
+        return <UrlForm />;
+      case 'login':
+        return <Login />;
+      case 'register':
+        return <Register />; 
+      default:
+        return <Login />; 
+    }
+  }
 
   render() {
     const { classes } = this.props;
+
     return (
-      <div class="App">
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" style={{flexGrow: 1}}>Shrink Url</Typography>
-            <Button color="inherit">Register</Button>
-            <Button color="inherit">Login</Button>
-          </Toolbar>
-        </AppBar>
-        <div style={{marginTop: 40}}>
-          <TextField style={{ minWidth: 400}} label="URL" autoFocus
-            onChange={this.onChange}></TextField>  
-          <Button variant="contained" color="primary"
-          onClick={this.onClick}>
-            Shrink
-          </Button>
-          <Typography>{this.state.minimizedUrl}</Typography>
+      <div>
+        <AppHeader onPageChange={this.onPageChange} />
+        <div style={{marginTop: 40, textAlign: 'center'}}>
+          {this.getCurrentPage()}
         </div>
       </div>
     );
