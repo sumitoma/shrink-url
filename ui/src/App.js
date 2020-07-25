@@ -1,54 +1,40 @@
 import React, { Component } from "react";
-import "./App.css";
-import AppHeader from './components/AppHeaderBar';
-import { withStyles } from "@material-ui/core/styles"; 
-import UrlForm from "./components/UrlForm";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import AppHeaderBar from "./components/AppHeaderBar";
+import pages from "./pages/pages";
+import theme from "./theme";
+import { withStyles, createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from "react-router-dom";
 
-const useStyles = theme => ({
-  helloThereStyle : {
-    color: 'red'
-  }
-}); 
 
-class App extends Component{
 
-  state = {
-    currentPage: 'urlForm'
-  }
+const customTheme = createMuiTheme(theme);
 
-  onPageChange = (page)=>{
-    this.setState({
-      currentPage: page
-    });
-  }
-
-  getCurrentPage(){
-    switch(this.state.currentPage){
-      case 'urlForm':
-        return <UrlForm />;
-      case 'login':
-        return <Login />;
-      case 'register':
-        return <Register />; 
-      default:
-        return <Login />; 
-    }
+class App extends Component {
+  constructor(props) {
+    super(props);
   }
 
   render() {
-    const { classes } = this.props;
-
     return (
-      <div>
-        <AppHeader onPageChange={this.onPageChange} />
-        <div style={{marginTop: 40, textAlign: 'center'}}>
-          {this.getCurrentPage()}
-        </div>
-      </div>
+      <ThemeProvider theme={customTheme}>
+          <Router>
+          <AppHeaderBar />
+          <div style={{textAlign: 'center'}}>
+            <Switch>
+            {
+                pages.map( page => <Route exact key={page.to} 
+                path={page.to} component={page.page} />)
+            }
+            </Switch>
+          </div>
+        </Router>
+      </ThemeProvider>
     );
   }
 }
 
-export default withStyles(useStyles)(App);
+export default App;
