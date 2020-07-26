@@ -1,5 +1,0 @@
-profile: service
-defaultPackage: shrinkln
----
-testFramework: junit
-sourceLanguage: java
