@@ -10,9 +10,9 @@ import io.micronaut.test.annotation.MicronautTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import shrink.ln.repository.UserPageableRespository;
-import shrink.ln.repository.UserRepository;
-import shrink.ln.repository.entities.User;
+import shrink.ln.repository.jpa.UserPageableRespository;
+import shrink.ln.repository.jpa.UserRepository;
+import shrink.ln.repository.jpa.entities.User;
 
 import javax.inject.Inject;
 import java.util.Arrays;
@@ -102,6 +102,5 @@ public class RepositoryTest {
         Assertions.assertEquals(2, page.getTotalPages());
         Assertions.assertEquals(3, page.getTotalSize());
     }
-
 
 }

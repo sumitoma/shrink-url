@@ -1,8 +1,8 @@
-package shrink.ln.repository;
+package shrink.ln.repository.jpa;
 
 import io.micronaut.data.annotation.Repository;
 import io.micronaut.data.repository.PageableRepository;
-import shrink.ln.repository.entities.User;
+import shrink.ln.repository.jpa.entities.User;
 
 
 @Repository

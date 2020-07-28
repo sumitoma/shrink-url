@@ -1,7 +1,8 @@
-package shrink.ln.repository.entities;
+package shrink.ln.repository.jpa.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class User {
