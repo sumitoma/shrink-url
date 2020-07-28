@@ -20,7 +20,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <micronaut.version>2.0.0</micronaut.version>
     <micronaut.data.version>1.1.1</micronaut.data.version>
-    <exec.mainClass>com.example.Application</exec.mainClass>
+    <exec.mainClass>shrink.ln.Application</exec.mainClass>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
   </properties>
