@@ -1,7 +1,24 @@
-FROM nginx
+FROM node:10.16.0-alpine as build
 
-COPY build /usr/share/nginx/html
+WORKDIR /app
+
+ENV PATH /app/node_modules/.bin:$PATH
+
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm ci --silent 
+
+COPY . ./
+
+RUN npm run build
+
+FROM nginx:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
+EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]
