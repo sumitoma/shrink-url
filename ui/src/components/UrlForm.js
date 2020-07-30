@@ -1,38 +1,32 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { TextField, Button, Typography} from '@material-ui/core';
 
-class UrlForm extends Component{
 
-    state = {
-        url: "",
-        minimizedUrl: this.url
-    };
+function UrlForm(props){
+    
+    const [url, setUrl] = useState('');
+    const [minimizedUrl, setMinimizedUrl] = useState(url);
 
-    onClick = (event) => {
-        this.setState({
-          minimizedUrl: this.state.url + "minimized"
-        });
+    function onClick(event){
+        setMinimizedUrl( url + "minimized");
     };
     
-    onChange = (event) => {
-        this.setState({
-          [event.target.name]: event.target.value
-        });
+   function onUrlChange(event){
+        setUrl(event.target.vale);
     };
 
-    render(){
-        return (
-            <div>
-                <TextField name="url" style={{ minWidth: 400}} label="URL" autoFocus
-                 onChange={this.onChange}></TextField>  
-                <Button variant="contained" color="primary"
-                onClick={this.onClick}>
-                    Shrink
-                </Button>
-                <Typography>{this.state.minimizedUrl}</Typography>
-            </div>
-        )
-    }
+    return  (
+        <div>
+            <TextField name="url" style={{ minWidth: 400}} label="URL" autoFocus
+             onChange={onUrlChange}></TextField>  
+            <Button variant="contained" color="primary"
+            onClick={onClick}>
+                Shrink
+            </Button>
+            <Typography>{minimizedUrl}</Typography>
+        </div>
+    );
+
 }
 
 export default UrlForm;

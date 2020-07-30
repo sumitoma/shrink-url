@@ -1,48 +1,35 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import LoginForm from "./../components/LoginForm";
 import MessageBar from "./../components/MessageBar";
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state={
-        message: {
-            message: '',
-            severity: '',
-            open: false
-        }
-    }
 
-    this.displayMessage = this.displayMessage.bind(this);
-    this.hideMessage = this.hideMessage.bind(this);
-  }
+function Login(props){
+  const [message, setMessage] = useState({
+    message: '',
+    severity: '',
+    open: false
+  });
 
-  displayMessage(message){
-    this.setState({
-        message: {
-            message: message.message,
-            severity: message.severity,
-            open: true
-        }
+  function displayMessage(message){
+    setMessage({
+      message: message.message,
+      severity: message.severity,
+      open: true
     });
   }
 
-  hideMessage(){
-      this.setState({
-        message: {
-            open: false
-        }
-      });
+  function hideMessage(){
+      setMessage({
+        open: false
+      })
   }
 
-  render() {
-    return (
-        <React.Fragment>
-            <MessageBar {...this.state.message} onClose={this.hideMessage} />
-            <LoginForm displayMessage={this.displayMessage} />
-        </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+        <MessageBar {...message} onClose={hideMessage} />
+        <LoginForm displayMessage={displayMessage} />
+    </React.Fragment>
+  );
 }
 
 export default Login;

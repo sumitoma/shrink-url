@@ -1,16 +1,13 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import RegisterForm from "./../components/RegisterForm";
 
-class Register extends Component {
-  constructor(props) {
-    super(props);
-  }
 
-  render() {
-    return (
-        <RegisterForm />
-    );
-  }
+function Register(props){
+
+  return (
+    <RegisterForm />
+  );
 }
+
 
 export default Register;
